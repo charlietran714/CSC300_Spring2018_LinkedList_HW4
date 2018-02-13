@@ -24,7 +24,7 @@ public class LinkedList
         this.theContext = theContext;
     }
 
-    public int removeFromIndex(int index)
+    public void removeFromIndex(int index)
     {
         if(index == 0)
         {
@@ -51,7 +51,6 @@ public class LinkedList
             this.linkedListContainer.removeViewAt(index);
             count--;
         }
-        return -1;
     }
 
     public int removeFront() throws Exception
