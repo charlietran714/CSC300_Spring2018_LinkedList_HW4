@@ -32,6 +32,21 @@ public class MainActivity extends AppCompatActivity
         this.ll.display();
     }
 
+    public void removeFromIndex(View v)
+    {
+        String temp = this.newNumberET.getText().toString();
+        this.newNumberET.setText("");
+        try
+        {
+            this.ll.removeFromIndex(Integer.parseInt(temp));
+            this.ll.display();
+        }
+        catch(Exception e)
+        {
+            System.err.println("Empty List");
+        }
+    }
+
     /*
     public void genericButtonOnClick(View v)
     {
@@ -51,7 +66,7 @@ public class MainActivity extends AppCompatActivity
         String temp = this.newNumberET.getText().toString();
         this.newNumberET.setText("");
         this.ll.addFront(Integer.parseInt(temp));
-        //this.ll.display();
+        this.ll.display();
     }
 
     public void addEndButtonClicked(View v)
@@ -59,7 +74,7 @@ public class MainActivity extends AppCompatActivity
         String temp = this.newNumberET.getText().toString();
         this.newNumberET.setText("");
         this.ll.addEnd(Integer.parseInt(temp));
-        //this.ll.display();
+        this.ll.display();
     }
 
     public void removeFrontButtonClicked(View v)

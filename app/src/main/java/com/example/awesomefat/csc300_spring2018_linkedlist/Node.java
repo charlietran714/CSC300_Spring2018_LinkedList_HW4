@@ -9,6 +9,7 @@ public class Node
     private int payload;
     private Node nextNode;
 
+
     public Node(int payload)
     {
         this.payload = payload;
@@ -49,4 +50,5 @@ public class Node
     {
         this.nextNode = n;
     }
+
 }

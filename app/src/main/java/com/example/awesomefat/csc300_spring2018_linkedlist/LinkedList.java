@@ -15,12 +15,43 @@ public class LinkedList
     private Node head;
     private ViewGroup linkedListContainer;
     private Context theContext;
+    private int count;
 
     public LinkedList(ViewGroup linkedListContainer, Context theContext)
     {
         this.head = null;
         this.linkedListContainer = linkedListContainer;
         this.theContext = theContext;
+    }
+
+    public int removeFromIndex(int index)
+    {
+        if(index == 0)
+        {
+            Node n = this.head;
+            this.head = n.getNextNode();
+            this.linkedListContainer.removeViewAt(0);
+            count--;
+        }
+        else if(index > count -1 || index < 0)
+        {
+            System.out.println("Out of bound");
+        }
+        else {
+            Node currNode = this.head;
+            Node node2Remove = this.head;
+            for (int i = 0; i < index; i++) {
+                currNode = currNode.getNextNode();
+            }
+            while (node2Remove.getNextNode() != currNode) {
+                node2Remove = node2Remove.getNextNode();
+            }
+            node2Remove.setNextNode(currNode.getNextNode());
+            currNode = null;
+            this.linkedListContainer.removeViewAt(index);
+            count--;
+        }
+        return -1;
     }
 
     public int removeFront() throws Exception
@@ -32,6 +63,7 @@ public class LinkedList
             Node node2Remove = this.head;
             this.head = this.head.getNextNode();
             node2Remove.setNextNode(null);
+            this.count--;
             this.linkedListContainer.removeViewAt(0); // removes the view at 0
             return node2Remove.getPayload();
         }
@@ -40,6 +72,7 @@ public class LinkedList
             Toast.makeText(this.theContext, "List is Empty", Toast.LENGTH_SHORT).show();
             throw new Exception("Empty List");
         }
+
     }
 
     public int removeEnd() throws Exception
@@ -70,8 +103,8 @@ public class LinkedList
                 }
                 //prevNode points to the node right before node2Remove
                 prevNode.setNextNode(null);
-
             }
+            this.count--;
             this.linkedListContainer.removeViewAt(this.linkedListContainer.getChildCount()-1);
             return node2Remove.getPayload();
         }
@@ -98,6 +131,7 @@ public class LinkedList
             n.setNextNode(this.head);
             this.head = n;
         }
+        this.count++;
 
         //update the interface
         TextView tv = new TextView(this.theContext);
@@ -133,6 +167,7 @@ public class LinkedList
             tv.setGravity(Gravity.CENTER);
             this.linkedListContainer.addView(tv);
         }
+        this.count++;
     }
 
     public void display()
